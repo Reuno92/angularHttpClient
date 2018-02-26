@@ -10,14 +10,13 @@ import {map} from 'rxjs/operators';
   styleUrls: ['./main.component.css']
 })
 
-
+@Injectable()
 export class MainComponent implements OnInit {
- @Injectable()
 
   public id: number;
   public name: string;
 
-  constructor(private mainService: MainService, private fb: FormBuilder) { }
+  constructor(private mainService: MainService, private fb: FormBuilder) {}
 
   mainGroup = this.fb.group({
         id:  [{value: '', disabled: true}, Validators.min(0)],
@@ -26,15 +25,16 @@ export class MainComponent implements OnInit {
 
   ngOnInit() {
     this.getMain();
+    console.log(`ReactiveForm give`, this.mainGroup);
+    console.log(`HttpClient respond`, this.mainService.getMain());
   }
 
   getMain() {
     this.mainService.getMain()
-        .subscribe(data => {this.id = data.id; this.name = data.name; }, err => console.log(err));
-  }
+        .subscribe(data => {
+            this.mainGroup.controls.id.setValue(data.id);
+            this.mainGroup.controls.name.setValue(data.name);
+            }, err => console.log(err));
 
-  confirmForm() {
-    console.log(this.mainGroup);
   }
-
 }

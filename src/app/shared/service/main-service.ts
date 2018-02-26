@@ -3,20 +3,14 @@ import {HttpClient, HttpHeaders, HttpRequest} from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import {Main} from '../model/main';
 
-
-const baseUri = 'http://localhost:3000/';
-const jsonDirectory = 'javascripts/';
-const main = 'main.json';
+const baseUri = 'https://jsonplaceholder.typicode.com/';
+const main = 'users/1';
 const jsonHeaders = new HttpHeaders({'Content-type': 'application/json', 'Access-Control-Allow-Origin': '*'});
-
-
-
-
 
 @Injectable()
 export class MainService implements OnInit {
 
-  mainRequest = baseUri + jsonDirectory + main;
+  mainRequest = baseUri + main;
 
   jsonOption = jsonHeaders;
 
@@ -27,7 +21,7 @@ export class MainService implements OnInit {
   }
 
   getMain(): Observable<Main> {
-    return this.http.get<Main>(this.mainRequest, {withCredentials: true, headers: this.jsonOption});
+    return this.http.get<Main>(this.mainRequest);
   }
 
 }
