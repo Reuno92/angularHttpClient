@@ -2,6 +2,7 @@ import {Component, Injectable, OnInit} from '@angular/core';
 
 import { MainService } from '../shared/service/main-service';
 import { FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-main',
@@ -29,7 +30,7 @@ export class MainComponent implements OnInit {
 
   getMain() {
     this.mainService.getMain()
-        .subscribe(data => data, err => console.log(err));
+        .subscribe(data => {this.id = data.id; this.name = data.name; }, err => console.log(err));
   }
 
   confirmForm() {
