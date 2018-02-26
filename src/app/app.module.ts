@@ -1,10 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
-
+import { HttpClientModule, HttpClientJsonpModule} from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { AppComponent } from './app.component';
 import { MainComponent } from './main/main.component';
-
+import { MainService } from './shared/service/main-service';
 
 @NgModule({
   declarations: [
@@ -12,9 +12,15 @@ import { MainComponent } from './main/main.component';
     MainComponent
   ],
   imports: [
-    BrowserModule
+      BrowserModule,
+      HttpClientModule,
+      HttpClientJsonpModule,
+      FormsModule,
+      ReactiveFormsModule
   ],
-  providers: [],
+  providers: [
+      MainService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

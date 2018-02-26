@@ -1,3 +1,31 @@
-<p>
-  main works!
-</p>
+<div class="jumbotron row">
+    <form (ngSumit)="confirmForm" [formGroup]="mainGroup">
+        <div class="row">
+            <div class="form-group col-4">
+                <label for="id">Id
+                    <input formControlName="id" id="id" type="number" [min]="0" class="form-control">
+                </label>
+            </div>
+            <div class="form-group col-4">
+                <label for="name">Name
+                    <input formControlName="name" id="name" type="text" [minlength]="3" class="form-control">
+                </label>
+            </div>
+            <div class="form-group col-4">
+                <br>
+                <input id="submit" type="submit" class="form-control btn btn-success">
+            </div>
+        </div>
+        <div class="row">
+            <div class="alert alert-danger col-12"
+            *ngIf="mainGroup.controls.id.touched && mainGroup.controls.id.invalid">
+                    id is invalid !  Correct this please.
+            </div>
+            <div class="alert alert-danger col-12" *ngIf="mainGroup.controls.name.touched && mainGroup.controls.name.invalid">
+                <div>
+                    Name is invalid !
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
